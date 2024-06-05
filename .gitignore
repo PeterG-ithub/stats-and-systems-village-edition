@@ -1,0 +1,14 @@
+# Ignore virtual environment directories
+venv/
+env/
+
+# Ignore local development settings
+*.env
+
+# Ignore editor/IDE configuration files
+.idea/
+.vscode/
+
+# Ignore compiled Python files
+*.pyc
+*.pyo
