@@ -4,25 +4,31 @@ from src.entities.predator import Predator
 
 class Ecosystem:
     def __init__(self) -> None:
-        self.rabbits = []
-        self.hawks = []
-        self.create_rabbits()
-        self.create_hawks()
+        self.preys = []
+        self.predators = []
+        self.prey_population = 0
+        self.predator_population = 0
 
-    def create_rabbits(self, num=10) -> None:
+    def create_preys(self, num=1, name="Rabbit") -> None:
         for i in range(num):
-            rabbit = Prey(i, "Rabbit")
-            self.rabbits.append(rabbit)
+            prey = Prey(i, name)
+            self.preys.append(prey)
+        self.update_population()
 
-    def create_hawks(self, num=5) -> None:
+    def create_predators(self, num=1, name="Hawk") -> None:
         for i in range(num):
-            hawk = Predator(i, "Hawk")
-            self.hawks.append(hawk)
+            predator = Predator(i, name)
+            self.predators.append(predator)
+        self.update_population()
 
     def roll(self) -> None:
-        for rabbit in self.rabbits:
-            rabbit.roll()
-            print(rabbit)
-        for hawk in self.hawks:
-            hawk.roll()
-            print(hawk)
+        for prey in self.preys:
+            prey.roll()
+            print(prey)
+        for predator in self.predators:
+            predator.roll()
+            print(predator)
+
+    def update_population(self) -> None:
+        self.prey_population = len(self.preys)
+        self.predator_population = len(self.predators)

@@ -2,9 +2,9 @@ from src.event_simulator import Dice
 
 
 class Animal:
-    def __init__(self, id) -> None:
+    def __init__(self, id, species="") -> None:
         self.id = id
-        self.species = ""
+        self.species = species
 
     def __str__(self) -> str:
         return f"{self.species}#{self.id} rolled {self.roll()}"
