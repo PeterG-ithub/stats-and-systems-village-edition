@@ -1,19 +1,48 @@
-# Stats and Systems: Village Edition
+## Predator-Prey Simulation Branch
 
-This is a Python-based simulation project that creates a virtual village where all actions and events are governed by statistical probabilities. In this simulated world, players can observe and interact with a community of villagers, but the village will thrive or decline based on the statistical dynamics regardless of player intervention. Players act as additional variables in the equation, influencing the village's trajectory but not solely determining its fate.
+This branch of the project implements a predator-prey simulation within the existing village simulation framework. It simulates the dynamics of predator-prey interaction.
 
-## Key Features
+### Goal
 
-1. **Statistical Modeling:** Every aspect of the village, from childbirth to foraging, is driven by statistical probabilities. Each villager has unique statistics governing their abilities and behaviors.
+The goal is to simulate predator-prey dynamics that will have similar results as the Lotka-Volterra equations, without explicitly using them.
 
-2. **Dynamic Simulation:** The village evolves over time as villagers age, reproduce, and interact with their environment. Random events and encounters add unpredictability and excitement to the simulation.
+## To-Do List
 
-3. **Resource Management:** Players can influence the village's resource allocation, but the village's survival and growth are ultimately determined by its statistical dynamics.
+1. **Define Parameters**
+   - [ ] Define parameters for prey and predator agents:
+     - Birth rate
+     - Death rate
+     - Reproductive rate
+     - Maximum population size
+     - Energy requirements
+     - Success rates for hunting or fleeing
 
-4. **Player Influence:** Players act as additional variables in the simulation, influencing the village's development through strategic decisions and interventions.
+2. **Agent-Based Modeling**
+   - [ ] Implement an agent-based modeling approach:
+     - Define classes for prey and predator agents
+     - Assign initial characteristics and behaviors to each agent
 
-5. **Exploration and Discovery:** As the simulation progresses, players uncover new elements of the village's ecosystem, encountering wildlife, discovering new resources, and influencing the village's statistical dynamics.
+3. **Simulation Steps**
+   - [ ] Implement simulation steps:
+     - Update the state of each agent in each time step
+     - Handle reproduction, mortality, and interactions between agents
 
-## Goal
+4. **Interaction Rules**
+   - [ ] Define rules for how prey and predator agents interact:
+     - Prey agents flee from nearby predators
+     - Predator agents hunt nearby prey
 
-The ultimate goal of this project is to explore the interconnectedness of various factors within an ecosystem and how changes in one aspect can cascade throughout the entire system. By observing and interacting with the virtual village, players gain insights into the delicate balance of ecosystems and the complex relationships between different elements. Through experimentation and observation, players can learn how to adapt and manage these interconnected systems to promote sustainability and resilience within the village.
+5. **Population Dynamics**
+   - [ ] Track population sizes of prey and predator agents:
+     - Visualize population dynamics over time
+     - Generate graphs to observe ecosystem behavior
+
+6. **Feedback Mechanisms**
+   - [ ] Introduce feedback mechanisms:
+     - Implement density-dependent birth and death rates
+     - Model how population sizes affect reproduction and mortality rates
+
+7. **Sensitivity Analysis**
+   - [ ] Conduct sensitivity analysis:
+     - Explore how changes in model parameters affect ecosystem dynamics
+     - Identify key factors driving population fluctuations
