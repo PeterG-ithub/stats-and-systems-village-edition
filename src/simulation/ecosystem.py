@@ -1,5 +1,5 @@
-from src.entities.rabbit import Rabbit
-from src.entities.hawk import Hawk
+from src.entities.prey import Prey
+from src.entities.predator import Predator
 
 
 class Ecosystem:
@@ -11,12 +11,12 @@ class Ecosystem:
 
     def create_rabbits(self, num=10) -> None:
         for i in range(num):
-            rabbit = Rabbit(i)
+            rabbit = Prey(i, "Rabbit")
             self.rabbits.append(rabbit)
 
     def create_hawks(self, num=5) -> None:
         for i in range(num):
-            hawk = Hawk(i)
+            hawk = Predator(i, "Hawk")
             self.hawks.append(hawk)
 
     def roll(self) -> None:
@@ -26,4 +26,3 @@ class Ecosystem:
         for hawk in self.hawks:
             hawk.roll()
             print(hawk)
-
