@@ -14,11 +14,3 @@ class Prey(Animal):
         # when getting hunted
         pass
 
-    def update_mortality(self):
-        # Mortality based on a rabbit age cycle
-        if self.age < 30:  # 1 month
-            self.mortality_rate = 80
-        elif self.age < 90:  # 3 months
-            self.mortality_rate = 50
-        else:
-            self.mortality_rate = 10

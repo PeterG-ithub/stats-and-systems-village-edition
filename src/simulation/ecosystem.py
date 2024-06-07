@@ -13,7 +13,7 @@ class Ecosystem:
     def create_preys(self, num=1, name="Rabbit") -> None:
         for i in range(num):
             prey = Prey(i, name)
-            prey.age = 0
+            prey.age = 91
             prey.update_mortality()
             print(prey.mortality_rate)
             self.preys.append(prey)
@@ -41,5 +41,12 @@ class Ecosystem:
     def simulate_day(self):
         self.roll()
         for prey in self.preys:
+            if prey.is_pregnant:
+                prey.gestation_timer -= 1
             prey.age += 1
             prey.update_mortality()
+            prey.can_reproduce()
+            if prey.can_give_birth():
+                for child in prey.new_children:
+                    self.preys.append(child)
+        self.update_population()
