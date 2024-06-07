@@ -11,12 +11,14 @@ class Animal:
         self.is_female = random.choice([True, False])
         self.is_pregnant = False
         self.gestation_timer = 0
+        self.is_alive = True
+        self.children = []
 
     def __str__(self) -> str:
-        return f"{self.species}#{self.id} rolled {self.roll()}"
+        return f"{self.species}#{self.id}"
 
     def roll(self):
-        dice = Dice()
+        dice = Dice(100)
         return dice.roll()
 
     def eat(self, food):
@@ -26,4 +28,11 @@ class Animal:
         pass
 
     def die(self):
-        pass
+        print(f"{self.species}#{self.id} is dead")
+        self.is_alive = False
+
+    def is_dead_today(self) -> bool:
+        if self.roll() < self.mortality_rate:
+            self.die()
+            return True
+        return False

@@ -6,6 +6,7 @@ class Ecosystem:
     def __init__(self) -> None:
         self.preys = []
         self.predators = []
+        self.dead = []
         self.prey_population = 0
         self.predator_population = 0
 
@@ -21,13 +22,10 @@ class Ecosystem:
             self.predators.append(predator)
         self.update_population()
 
-    def roll(self) -> None:
+    def roll(self):
         for prey in self.preys:
-            prey.roll()
-            print(prey)
-        for predator in self.predators:
-            predator.roll()
-            print(predator)
+            if prey.is_dead_today():
+                self.dead.append(prey)
 
     def update_population(self) -> None:
         self.prey_population = len(self.preys)
