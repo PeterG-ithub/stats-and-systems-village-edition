@@ -33,7 +33,7 @@ class Animal:
 
     def reproduce(self):
         self.is_pregnant = True
-        self.gestation_timer = 30
+        self.gestation_timer = random.randint(28, 31)
         print(f"Rabbit#{self.id} is now pregnant")
 
     def can_give_birth(self):
@@ -55,18 +55,18 @@ class Animal:
     def update_mortality(self):
         # Mortality based on a rabbit age cycle
         if self.age < 30:  # 1 month
-            self.mortality_rate = 10
+            self.mortality_rate = 1 - (1 - 0.9)**(1 / 30)  # (1 - D)^30 = 1 - M where D is daily mortality rate and M is monthly mortality rate 
         elif self.age < 90:  # 3 months
-            self.mortality_rate = 5
+            self.mortality_rate = 1 - (1 - 0.5)**(1 / 60)
         else:
-            self.mortality_rate = 1
+            self.mortality_rate = 1 - (1 - 0.1)**(1 / 90)
  
     def die(self):
         print(f"{self.species}#{self.id} is dead")
         self.is_alive = False
 
     def is_dead_today(self) -> bool:
-        if self.roll() < self.mortality_rate:
+        if self.roll() / 100 < self.mortality_rate:
             self.die()
             return True
         return False
