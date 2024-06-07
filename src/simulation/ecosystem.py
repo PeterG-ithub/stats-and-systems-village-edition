@@ -39,14 +39,16 @@ class Ecosystem:
         self.predator_population = len(self.predators)
 
     def simulate_day(self):
-        self.roll()
         for prey in self.preys:
             if prey.is_pregnant:
                 prey.gestation_timer -= 1
             prey.age += 1
             prey.update_mortality()
+            prey.update_flee_rate()
+            prey.update_detection_rate()
             prey.can_reproduce()
-            if prey.can_give_birth():
+            if prey.can_give_birth(Prey):
                 for child in prey.new_children:
                     self.preys.append(child)
+        self.roll()
         self.update_population()

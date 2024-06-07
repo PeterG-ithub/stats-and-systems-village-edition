@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 ecosystem = Ecosystem()
 ecosystem.create_preys(100, "Rabbit")
 ecosystem.create_predators(10, "Hawk")
-time_steps = 1000
+time_steps = 100
 
 prey_population = []
 predator_population = []

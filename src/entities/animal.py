@@ -20,7 +20,7 @@ class Animal:
 
     def roll(self):
         dice = Dice(100)
-        return dice.roll()
+        return dice.roll() / 100
 
     def eat(self, food):
         pass
@@ -36,17 +36,17 @@ class Animal:
         self.gestation_timer = random.randint(28, 31)
         print(f"Rabbit#{self.id} is now pregnant")
 
-    def can_give_birth(self):
+    def can_give_birth(self, cls):
         if self.is_pregnant and self.gestation_timer == 0:
-            self.give_birth()
+            self.give_birth(cls)
             return True
         return False
 
-    def give_birth(self):
+    def give_birth(self, cls):
         self.new_children = []
         children = random.randint(4, 12)
         for child in range(children):
-            child = Animal(f"{self.id}-{child}", self.species)  # Got to figure out what to do with the id
+            child = cls(f"{self.id}-{child}", self.species)  # Got to figure out what to do with the id
             self.children.append(child)
             self.new_children.append(child)
             print(f"Rabbit#{self.id} gave birth to Rabbit#{child.id}")
@@ -66,7 +66,7 @@ class Animal:
         self.is_alive = False
 
     def is_dead_today(self) -> bool:
-        if self.roll() / 100 < self.mortality_rate:
+        if self.roll() < self.mortality_rate:
             self.die()
             return True
         return False
