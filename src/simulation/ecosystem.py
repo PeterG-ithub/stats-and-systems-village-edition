@@ -13,6 +13,9 @@ class Ecosystem:
     def create_preys(self, num=1, name="Rabbit") -> None:
         for i in range(num):
             prey = Prey(i, name)
+            prey.age = 0
+            prey.update_mortality()
+            print(prey.mortality_rate)
             self.preys.append(prey)
         self.update_population()
 
@@ -23,10 +26,20 @@ class Ecosystem:
         self.update_population()
 
     def roll(self):
+        living_preys = []
         for prey in self.preys:
-            if prey.is_dead_today():
+            if not prey.is_dead_today():
+                living_preys.append(prey)
+            else:
                 self.dead.append(prey)
+        self.preys = living_preys
 
     def update_population(self) -> None:
         self.prey_population = len(self.preys)
         self.predator_population = len(self.predators)
+
+    def simulate_day(self):
+        self.roll()
+        for prey in self.preys:
+            prey.age += 1
+            prey.update_mortality()

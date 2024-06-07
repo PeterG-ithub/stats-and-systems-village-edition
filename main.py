@@ -9,5 +9,5 @@ time_steps = 365
 prey_population = []
 predator_population = []
 
-ecosystem.roll()
-print(len(ecosystem.dead))
+ecosystem.simulate_day()
+print(len(ecosystem.preys))
