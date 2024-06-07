@@ -24,8 +24,28 @@ class Animal:
     def eat(self, food):
         pass
 
-    def reproduce(self, who):
-        pass
+    def can_reproduce(self):
+        if self.is_female():
+            self.reproduce()
+            return True
+        return False
+
+    def reproduce(self):
+        self.is_pregnant = True
+        self.gestation_timer = 30
+
+    def can_give_birth(self):
+        if self.is_pregnant and self.gestation_timer == 0:
+            self.give_birth()
+            return True
+        return False
+
+    def give_birth(self):
+        children = random.randint(4, 12)
+        for child in range(children):
+            child = Animal(f"{self.id}-{child}", self.species)  # Got to figure out what to do with the id
+            self.children.append(child)
+            print(f"Rabbit#{self.id} gave birth to Rabbit#{child.id}")
 
     def die(self):
         print(f"{self.species}#{self.id} is dead")
