@@ -14,6 +14,56 @@ class Animal:
         self.is_alive = True
         self.children = []
         self.new_children = []
+        self.state = "Idle"
+
+    def check_state(self):
+        if self.state == "Idle":
+            # Do nothing
+            pass
+        elif self.state == "Hunting":
+            self.hunt()  # Call the hunt method
+        elif self.state == "Eating":
+            self.eat()  # Call the eat method
+        elif self.state == "Resting":
+            self.rest()  # Call the rest method
+        elif self.state == "Sleeping":
+            self.sleep()  # Call the sleep method
+        elif self.state == "Exploring":
+            self.explore()  # Call the explore method
+        elif self.state == "Escaping":
+            self.escape()  # Call the escape method
+        elif self.state == "Guarding":
+            self.guard()  # Call the guard method
+        else:
+            print(f"Unknown state: {self.state}")
+
+    def hunt(self):
+        # Behavior for hunting state
+        pass
+
+    def eat(self):
+        # Behavior for eating state
+        pass
+
+    def rest(self):
+        # Behavior for resting state
+        pass
+
+    def sleep(self):
+        # Behavior for sleeping state
+        pass
+
+    def explore(self):
+        # Behavior for exploring state
+        pass
+
+    def escape(self):
+        # Behavior for escaping state
+        pass
+
+    def guard(self):
+        # Behavior for guarding state
+        pass
 
     def __str__(self) -> str:
         return f"{self.species}#{self.id}"
@@ -21,9 +71,6 @@ class Animal:
     def roll(self):
         dice = Dice(100)
         return dice.roll() / 100
-
-    def eat(self, food):
-        pass
 
     def can_reproduce(self):
         if self.is_female and not self.is_pregnant and self.age > 90:
@@ -60,7 +107,7 @@ class Animal:
             self.mortality_rate = 1 - (1 - 0.5)**(1 / 60)
         else:
             self.mortality_rate = 1 - (1 - 0.1)**(1 / 90)
- 
+
     def die(self):
         print(f"{self.species}#{self.id} is dead")
         self.is_alive = False

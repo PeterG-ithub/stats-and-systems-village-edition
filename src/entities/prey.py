@@ -37,11 +37,11 @@ class Prey(Animal):
 
     def update_flee_rate(self):
         if self.age < 30:  # 1 month
-            self.flee_rate = 1 - (1 - 0.95)**(1 / 30)  # (1 - D)^30 = 1 - M where D is daily mortality rate and M is monthly mortality rate 
+            self.flee_rate = 1 - (1 - 0.95)**(1 / 30)
         elif self.age < 90:  # 3 months
-            self.flee_Rate = 1 - (1 - 0.5)**(1 / 60)
+            self.flee_rate = 1 - (1 - 0.5)**(1 / 60)
         else:
-            self.flee_Rate = 1 - (1 - 0.1)**(1 / 90)
+            self.flee_rate = 1 - (1 - 0.1)**(1 / 90)
 
     def update_detection_rate(self):
         if self.age < 30:  # 1 month
