@@ -15,6 +15,12 @@ class Animal:
         self.children = []
         self.new_children = []
         self.state = "Idle"
+        self.calorie = 0  # kCalories / energy the animal has or has eaten
+        self.weight = 0
+
+    def grow(self):
+        # Grow base on weight %
+        pass
 
     def check_state(self):
         if self.state == "Idle":
@@ -41,9 +47,8 @@ class Animal:
         # Behavior for hunting state
         pass
 
-    def eat(self):
-        # Behavior for eating state
-        pass
+    def eat(self, food_calories):
+        self.calorie += food_calories
 
     def rest(self):
         # Behavior for resting state
