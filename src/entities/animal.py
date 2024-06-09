@@ -15,8 +15,13 @@ class Animal:
         self.children = []
         self.new_children = []
         self.state = "Idle"
-        self.calorie = 0  # kCalories / energy the animal has or has eaten
+        self.calorie = 4000  # kCalories / energy the animal has or has eaten
+        self.hungry_treshold = 2000
+        self.satiety_treshold = 5000
         self.weight = 0
+
+    def check_hunger(self):
+        pass
 
     def grow(self):
         # Grow base on weight %
