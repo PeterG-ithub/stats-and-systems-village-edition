@@ -7,6 +7,8 @@ class Animal:
         self.id = id
         self.species = species
         self.age = 0  # Age in days
+        self.weight = 0  # Grams
+        self.state = "Idle"
         self.mortality_rate = 0
         self.is_female = random.choice([True, False])
         self.is_pregnant = False
@@ -14,12 +16,28 @@ class Animal:
         self.is_alive = True
         self.children = []
         self.new_children = []
-        self.state = "Idle"
+
         self.calorie = 4000  # kCalories / energy the animal has or has eaten
         self.hungry_threshold = 2000
         self.satiety_threshold = 5000
         self.chance_of_eating = 0.5
-        self.weight = 0
+
+        self.fatigue_threshold = 30
+        self.energy = 100
+        self.chance_of_sleeping = 0.1
+
+    def check_sleeping(self):
+        self.update_chance_of_sleeping()
+        if self.roll() < self.chance_of_sleeping:
+            self.state = "Sleeping"
+            self.sleep()
+
+    def update_chance_of_sleeping(self):
+        if self.energy <= self.fatigue_threshold:
+            self.chance_of_sleeping = 0.8
+        else:
+            proportion = self.energy / 100
+            self.chance_of_sleeping = 0.8 - (proportion * 0.7)
 
     def update_chance_of_eating(self):
         if self.calorie <= self.hungry_threshold:
@@ -64,6 +82,7 @@ class Animal:
         pass
 
     def eat(self, food_calories):
+        print(f"{self} is now eating")
         self.calorie += food_calories
 
     def rest(self):
@@ -71,8 +90,8 @@ class Animal:
         pass
 
     def sleep(self):
-        # Behavior for sleeping state
-        pass
+        print(f"{self} is now sleeping")
+        self.energy += 30
 
     def explore(self):
         # Behavior for exploring state

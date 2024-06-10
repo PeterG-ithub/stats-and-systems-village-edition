@@ -42,7 +42,15 @@ def simulate_rabbit_eating():
     print(rabbit.calorie)
 
 
-simulate_rabbit_eating()
+def simulate_rabbit_sleeping():
+    rabbit = Rabbit(1, 'rabbit')
+    rabbit.energy = 10
+    rabbit.check_sleeping()
+
+    print(rabbit.energy)
+
+simulate_rabbit_sleeping()
+# simulate_rabbit_eating()
 # simulate_rabbit_hourly()
 
 # newborn_weight = random.randint(30, 40)  # 0 - 7
