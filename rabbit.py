@@ -36,7 +36,14 @@ def simulate_rabbit_hourly():
         print(rabbit.state)
 
 
-simulate_rabbit_hourly()
+def simulate_rabbit_eating():
+    rabbit = Rabbit(1, 'rabbit')
+    rabbit.check_hunger()
+    print(rabbit.calorie)
+
+
+simulate_rabbit_eating()
+# simulate_rabbit_hourly()
 
 # newborn_weight = random.randint(30, 40)  # 0 - 7
 # one_week_weight = random.randint(50, 100)  # 7 - 14 days
