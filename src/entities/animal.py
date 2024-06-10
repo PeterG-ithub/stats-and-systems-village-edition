@@ -16,21 +16,22 @@ class Animal:
         self.new_children = []
         self.state = "Idle"
         self.calorie = 4000  # kCalories / energy the animal has or has eaten
-        self.hungry_treshold = 2000
-        self.satiety_treshold = 5000
+        self.hungry_threshold = 2000
+        self.satiety_threshold = 5000
         self.chance_of_eating = 0.5
         self.weight = 0
 
     def update_chance_of_eating(self):
-        if self.calorie < self.hungry_treshold:
+        if self.calorie <= self.hungry_threshold:
             self.chance_of_eating = 0.9
-        elif self.calorie > self.satiety_treshold:
+        elif self.calorie >= self.satiety_threshold:
             self.chance_of_eating = 0.2
         else:
             proportion = (self.calorie - self.hungry_threshold) / (self.satiety_threshold - self.hungry_threshold)
             self.chance_of_eating = 0.9 - (proportion * (0.9 - 0.2))
 
     def check_hunger(self):
+        self.update_chance_of_eating()
         if self.roll() < self.chance_of_eating:
             self.state = "Eating"
 
@@ -40,12 +41,11 @@ class Animal:
 
     def check_state(self):
         if self.state == "Idle":
-            # Do nothing
             pass
         elif self.state == "Hunting":
             self.hunt()  # Call the hunt method
         elif self.state == "Eating":
-            self.eat(500)  # Call the eat method
+            self.eat()  # Call the eat method
         elif self.state == "Resting":
             self.rest()  # Call the rest method
         elif self.state == "Sleeping":
