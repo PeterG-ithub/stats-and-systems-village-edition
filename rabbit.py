@@ -38,6 +38,8 @@ def simulate_rabbit_hourly():
         print(f"Hour {i}: {rabbit.state}")
         if rabbit.state in state_counter:
             state_counter[rabbit.state] += 1
+
+        rabbit.energy -= 10
     plot_state_counter(state_counter)
 
 

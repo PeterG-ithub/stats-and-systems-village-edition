@@ -86,10 +86,6 @@ class Animal:
     def update_chance_of_guarding(self):
         pass
 
-    def grow(self):
-        # Grow base on weight %
-        pass
-
     def update_state(self):
         self.update_all_chances()
         total_chance = sum(self.chances.values())
@@ -126,18 +122,25 @@ class Animal:
     def hunt(self):
         # Behavior for hunting state
         pass
+    
+    def convert_calorie_to_energy(self, rate):  # If rate = 1, conversion_rate = 1000cal/30energy
+        calories_taken = 500 * rate
+        convertion_rate = 30 / 1000
+        self.energy += (calories_taken * convertion_rate)
+        self.calorie -= calories_taken
 
     def eat(self, food_calories):
         print(f"{self} is now eating")
         self.calorie += food_calories
 
     def rest(self):
-        self.energy += 10
+        print(f"{self} is now resting")
+        self.convert_calorie_to_energy(.7)
         pass
 
     def sleep(self):
         print(f"{self} is now sleeping")
-        self.energy += 30
+        self.convert_calorie_to_energy(1)
 
     def explore(self):
         # Behavior for exploring state
@@ -149,6 +152,10 @@ class Animal:
 
     def guard(self):
         # Behavior for guarding state
+        pass
+
+    def grow(self):
+        # Grow base on weight %
         pass
 
     def __str__(self) -> str:
