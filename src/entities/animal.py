@@ -17,14 +17,18 @@ class Animal:
         self.children = []
         self.new_children = []
 
+        self.chances = {
+            "Eating": 0.0,
+            "Sleeping": 0.0,
+            "Resting": 0.0
+        }
+
         self.calorie = 4000  # kCalories / energy the animal has or has eaten
         self.hungry_threshold = 2000
         self.satiety_threshold = 5000
-        self.chance_of_eating = 0.5
 
         self.fatigue_threshold = 30
         self.energy = 100
-        self.chance_of_sleeping = 0.1
 
     def update_all_chances(self):
         self.update_chance_of_eating()
@@ -38,19 +42,19 @@ class Animal:
 
     def update_chance_of_sleeping(self):
         if self.energy <= self.fatigue_threshold:
-            self.chance_of_sleeping = 0.8
+            self.chances["Sleeping"] = 0.8
         else:
             proportion = self.energy / 100
-            self.chance_of_sleeping = 0.8 - (proportion * 0.7)
+            self.chances["Sleeping"] = 0.8 - (proportion * 0.7)
 
     def update_chance_of_eating(self):
         if self.calorie <= self.hungry_threshold:
-            self.chance_of_eating = 0.9
+            self.chances["Eating"] = 0.9
         elif self.calorie >= self.satiety_threshold:
-            self.chance_of_eating = 0.2
+            self.chances["Eating"] = 0.2
         else:
             proportion = (self.calorie - self.hungry_threshold) / (self.satiety_threshold - self.hungry_threshold)
-            self.chance_of_eating = 0.9 - (proportion * (0.9 - 0.2))
+            self.chances["Eating"] = 0.9 - (proportion * (0.9 - 0.2))
 
     def check_hunger(self):
         self.update_chance_of_eating()
@@ -63,12 +67,17 @@ class Animal:
 
     def update_state(self):
         self.update_all_chances()
-        total_chance = self.chance_of_eating + self.chance_of_sleeping
-        roll = self.roll * total_chance
-        if roll < self.chance_of_eating:
-            self.state = "Eating"
-        else:
-            self.state = "Sleeping" 
+        total_chance = sum(self.chances.values())
+        
+        # Scale the roll to the total chance
+        roll = self.roll() * total_chance
+        cumulative_chance = 0.0
+        
+        for state, chance in self.chances.items():
+            cumulative_chance += chance
+            if roll < cumulative_chance:
+                self.state = state
+                break
 
     def check_state(self):
         self.update_state()
@@ -77,7 +86,7 @@ class Animal:
         elif self.state == "Hunting":
             self.hunt()  # Call the hunt method
         elif self.state == "Eating":
-            self.eat()  # Call the eat method
+            self.eat(500)  # Call the eat method
         elif self.state == "Resting":
             self.rest()  # Call the rest method
         elif self.state == "Sleeping":

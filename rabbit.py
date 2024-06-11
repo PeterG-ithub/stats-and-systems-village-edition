@@ -33,6 +33,7 @@ def simulate_rabbit_hourly():
     rabbit = Rabbit(1, 'rabbit')
     rabbit.set_adult_attributes()
     for i in range(24):
+        rabbit.check_state()
         print(rabbit.state)
 
 
@@ -49,9 +50,9 @@ def simulate_rabbit_sleeping():
 
     print(rabbit.energy)
 
-simulate_rabbit_sleeping()
+#simulate_rabbit_sleeping()
 # simulate_rabbit_eating()
-# simulate_rabbit_hourly()
+simulate_rabbit_hourly()
 
 # newborn_weight = random.randint(30, 40)  # 0 - 7
 # one_week_weight = random.randint(50, 100)  # 7 - 14 days
