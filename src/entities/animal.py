@@ -20,7 +20,11 @@ class Animal:
         self.chances = {
             "Eating": 0.0,
             "Sleeping": 0.0,
-            "Resting": 0.0
+            "Resting": 0.0,
+            "Exploring": 0.0,
+            "Hunting": 0.0,
+            "Escaping": 0.0,
+            "Guarding": 0.0
         }
 
         self.calorie = 4000  # kCalories / energy the animal has or has eaten
@@ -33,19 +37,17 @@ class Animal:
     def update_all_chances(self):
         self.update_chance_of_eating()
         self.update_chance_of_sleeping()
+        self.update_chance_of_exploring()
+        self.update_chance_of_escaping()
+        self.update_chance_of_guarding()
+        self.update_chance_of_hunting()
+        self.update_chance_of_resting()
 
     def check_sleeping(self):
         self.update_chance_of_sleeping()
         if self.roll() < self.chance_of_sleeping:
             self.state = "Sleeping"
             self.sleep()
-
-    def update_chance_of_sleeping(self):
-        if self.energy <= self.fatigue_threshold:
-            self.chances["Sleeping"] = 0.8
-        else:
-            proportion = self.energy / 100
-            self.chances["Sleeping"] = 0.8 - (proportion * 0.7)
 
     def update_chance_of_eating(self):
         if self.calorie <= self.hungry_threshold:
@@ -56,10 +58,33 @@ class Animal:
             proportion = (self.calorie - self.hungry_threshold) / (self.satiety_threshold - self.hungry_threshold)
             self.chances["Eating"] = 0.9 - (proportion * (0.9 - 0.2))
 
-    def check_hunger(self):
-        self.update_chance_of_eating()
-        if self.roll() < self.chance_of_eating:
-            self.state = "Eating"
+    def update_chance_of_sleeping(self):
+        if self.energy > 100:
+            self.energy = 100
+        if self.energy <= self.fatigue_threshold:
+            self.chances["Sleeping"] = 0.8
+        else:
+            proportion = self.energy / 100
+            self.chances["Sleeping"] = 0.8 - (proportion * 0.7)
+    
+    def update_chance_of_resting(self):
+        if self.energy <= self.fatigue_threshold:
+            self.chances["Resting"] = 0.5
+        else:
+            proportion = self.energy / 100
+            self.chances["Resting"] = 0.5 - (proportion * 0.4)
+
+    def update_chance_of_exploring(self):
+        pass
+
+    def update_chance_of_hunting(self):
+        pass
+
+    def update_chance_of_escaping(self):
+        pass
+
+    def update_chance_of_guarding(self):
+        pass
 
     def grow(self):
         # Grow base on weight %
@@ -68,11 +93,11 @@ class Animal:
     def update_state(self):
         self.update_all_chances()
         total_chance = sum(self.chances.values())
-        
+
         # Scale the roll to the total chance
         roll = self.roll() * total_chance
         cumulative_chance = 0.0
-        
+
         for state, chance in self.chances.items():
             cumulative_chance += chance
             if roll < cumulative_chance:
@@ -107,7 +132,7 @@ class Animal:
         self.calorie += food_calories
 
     def rest(self):
-        # Behavior for resting state
+        self.energy += 10
         pass
 
     def sleep(self):
