@@ -32,9 +32,13 @@ def simulate_rabbit_reproduction():
 def simulate_rabbit_hourly():
     rabbit = Rabbit(1, 'rabbit')
     rabbit.set_adult_attributes()
+    state_counter = {"Sleeping": 0, "Eating": 0, "Resting": 0}
     for i in range(24):
         rabbit.check_state()
-        print(rabbit.state)
+        print(f"Hour {i}: {rabbit.state}")
+        if rabbit.state in state_counter:
+            state_counter[rabbit.state] += 1
+    plot_state_counter(state_counter)
 
 
 def simulate_rabbit_eating():
@@ -47,8 +51,20 @@ def simulate_rabbit_sleeping():
     rabbit = Rabbit(1, 'rabbit')
     rabbit.energy = 10
     rabbit.check_sleeping()
-
     print(rabbit.energy)
+
+
+def plot_state_counter(state_counter):
+    activities = list(state_counter.keys())
+    counts = list(state_counter.values())
+    plt.figure(figsize=(8, 5))
+    plt.bar(activities, counts, color=['blue', 'orange', 'green'])
+    plt.xlabel("Activities")
+    plt.ylabel("Count")
+    plt.title("State Counts over 24 Hours")
+    plt.show()
+
+
 
 #simulate_rabbit_sleeping()
 # simulate_rabbit_eating()
