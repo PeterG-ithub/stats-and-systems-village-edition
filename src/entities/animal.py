@@ -26,6 +26,10 @@ class Animal:
         self.energy = 100
         self.chance_of_sleeping = 0.1
 
+    def update_all_chances(self):
+        self.update_chance_of_eating()
+        self.update_chance_of_sleeping()
+
     def check_sleeping(self):
         self.update_chance_of_sleeping()
         if self.roll() < self.chance_of_sleeping:
@@ -57,7 +61,17 @@ class Animal:
         # Grow base on weight %
         pass
 
+    def update_state(self):
+        self.update_all_chances()
+        total_chance = self.chance_of_eating + self.chance_of_sleeping
+        roll = self.roll * total_chance
+        if roll < self.chance_of_eating:
+            self.state = "Eating"
+        else:
+            self.state = "Sleeping" 
+
     def check_state(self):
+        self.update_state()
         if self.state == "Idle":
             pass
         elif self.state == "Hunting":
@@ -74,8 +88,6 @@ class Animal:
             self.escape()  # Call the escape method
         elif self.state == "Guarding":
             self.guard()  # Call the guard method
-        else:
-            print(f"Unknown state: {self.state}")
 
     def hunt(self):
         # Behavior for hunting state
