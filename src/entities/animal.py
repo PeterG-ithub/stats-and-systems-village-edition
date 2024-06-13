@@ -16,7 +16,11 @@ class Animal:
         self.is_alive = True
         self.children = []
         self.new_children = []
-
+        self.attributes = {
+            "Speed": 0,
+            "Perception": 0,
+            "Stealth": 0
+        }
         self.chances = {
             "Eating": 0.0,
             "Sleeping": 0.0,
@@ -24,7 +28,9 @@ class Animal:
             "Exploring": 0.0,
             "Hunting": 0.0,
             "Escaping": 0.0,
-            "Guarding": 0.0
+            "Guarding": 0.0,
+            "FindingFood": 0.0,
+            "Hiding": 0.0
         }
 
         self.calorie = 4000  # kCalories / energy the animal has or has eaten
@@ -122,8 +128,8 @@ class Animal:
     def hunt(self):
         # Behavior for hunting state
         pass
-    
-    def convert_calorie_to_energy(self, rate):  # If rate = 1, conversion_rate = 1000cal/30energy
+
+    def convert_calorie_to_energy(self, rate):
         calories_taken = 500 * rate
         convertion_rate = 30 / 1000
         self.energy += (calories_taken * convertion_rate)
