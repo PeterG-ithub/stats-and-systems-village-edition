@@ -21,6 +21,11 @@ class Animal:
             "Perception": 0,
             "Stealth": 0
         }
+        self.experiences = {
+            "Hunting": 0.0,
+            "Hiding": 0.0,
+            "Escaping": 0.0
+        }
         self.chances = {
             "Eating": 0.0,
             "Sleeping": 0.0,
