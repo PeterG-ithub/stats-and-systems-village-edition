@@ -1,5 +1,5 @@
 from src.entities.prey import Prey
-import matplotlib.pyplot as plt
+from src.utils.plot import plot_state_counter
 import random
 
 
@@ -57,15 +57,7 @@ def simulate_rabbit_sleeping():
     print(rabbit.energy)
 
 
-def plot_state_counter(state_counter):
-    activities = list(state_counter.keys())
-    counts = list(state_counter.values())
-    plt.figure(figsize=(8, 5))
-    plt.bar(activities, counts, color=['blue', 'orange', 'green'])
-    plt.xlabel("Activities")
-    plt.ylabel("Count")
-    plt.title("State Counts over 24 Hours")
-    plt.show()
+
 
 
 
