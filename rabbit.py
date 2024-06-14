@@ -15,10 +15,11 @@ class Rabbit(Prey):
     def set_daily_food_intake(self):
         self.daily_food_intake = self.weight * 0.03  # 2% - 4% of their body weight in food per day
 
-    def set_adult_attributes(self):
+    def set_adult_rabbit(self):
         self.age = 91  # Days
         self.weight = 1750  # Grams
         self.calorie = 4000
+
 
 def simulate_rabbit_reproduction():
     rabbit = Rabbit(1, 'rabbit')
@@ -31,7 +32,7 @@ def simulate_rabbit_reproduction():
 
 def simulate_rabbit_hourly():
     rabbit = Rabbit(1, 'rabbit')
-    rabbit.set_adult_attributes()
+    rabbit.set_adult_rabbit()
     state_counter = {"Sleeping": 0, "Eating": 0, "Resting": 0}
     for i in range(24):
         rabbit.check_state()
@@ -68,25 +69,6 @@ def plot_state_counter(state_counter):
 
 
 
-#simulate_rabbit_sleeping()
+# simulate_rabbit_sleeping()
 # simulate_rabbit_eating()
 simulate_rabbit_hourly()
-
-# newborn_weight = random.randint(30, 40)  # 0 - 7
-# one_week_weight = random.randint(50, 100)  # 7 - 14 days
-# two_week_weight = random.randint(100, 150)  # 14 - 21 days
-# three_week_weight = random.randint(150, 200)  # 21-28 days
-# four_week_weight = random.randint(200, 300)  # 28+ days
-# adolescent_weight = random.randint(500, 1000)  # 8 weeks - 3 months old
-# adult_weight = random.randint(1000, 2500)  # 3+ months 
-# weight_through_age = [newborn_weight, one_week_weight, two_week_weight, three_week_weight, four_week_weight,'', '', '', adolescent_weight, '', '', '', adult_weight]
-
-# time_step = len(weight_through_age)
-
-# plt.figure(figsize=(10, 6))
-# plt.plot(range(time_step), weight_through_age, label='Rabbit weight by age')
-# plt.xlabel("week")
-# plt.ylabel("weight")
-# plt.title("Rabbit weight over time")
-# plt.legend()
-# plt.show()
